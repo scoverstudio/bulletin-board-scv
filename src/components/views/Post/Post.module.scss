@@ -1,0 +1,54 @@
+@import "../../../styles/settings.scss";
+
+.root {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  align-items: stretch;
+  margin-top: 50px;
+
+  .post {
+    width: 500px;
+    color: black;
+    background-color: white;
+    border-radius: 20px;
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  h2 {
+    text-align: center;
+  }
+  .control {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .content {
+    padding: 5px;
+    margin: 0;
+    border: 1px rgb(200, 200, 200) solid;
+    min-height: 100px;
+  }
+
+  .infoContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 0 5px;
+
+    p {
+      margin: 0;
+      width: 50%;
+
+      &:nth-child(even) {
+        text-align: right;
+      }
+      &.date {
+        color: rgb(160, 160, 160);
+        margin-top: 25px;
+      }
+    }
+  }
+}

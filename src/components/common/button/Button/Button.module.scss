@@ -1,0 +1,16 @@
+@import "../../../../styles/settings.scss";
+
+.button {
+  background-color: rgb(66, 85, 152);
+  text-align: center;
+  padding: 15px 25px;
+  border-radius: 25px;
+  color: white;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: 0.1s;
+
+  //   &:hover {
+  //     padding: 20px 30px;
+  //   }
+}

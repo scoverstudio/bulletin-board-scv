@@ -1,0 +1,47 @@
+@import "../../../styles/settings.scss";
+@import "../../../styles/global.scss";
+
+.root {
+  text-align: center;
+  .homePageTitle {
+    margin-top: 50px;
+  }
+  .loggedContainer {
+    margin-top: 30px;
+
+    .postsContainer {
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+      height: 100%;
+      margin-bottom: 25px;
+
+      .singlePost {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 23%;
+        height: 50px;
+        margin-bottom: 20px;
+        background-color: rgb(255, 255, 255);
+        color: rgb(35, 35, 35);
+        font-size: 18px;
+        text-decoration: none;
+        border-radius: 50px;
+        border: 1px grey solid;
+        transition: 0.3s;
+
+        &:hover {
+          //   border: 2px rgb(28, 32, 69) solid;
+          box-shadow: 0px 0px 15px 1px grey;
+        }
+
+        h3 {
+          margin: 0;
+        }
+      }
+    }
+  }
+}
