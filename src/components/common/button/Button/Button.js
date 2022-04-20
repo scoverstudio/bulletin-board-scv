@@ -9,7 +9,7 @@ import styles from "./Button.module.scss";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 
-const Component = ({ children, id, color, href }) => (
+const Component = ({ children, color, href }) => (
   <Link to={href} className={clsx(color, styles.button)}>
     {children}
   </Link>
@@ -17,7 +17,6 @@ const Component = ({ children, id, color, href }) => (
 
 Component.propTypes = {
   children: PropTypes.string,
-  id: PropTypes.string,
   color: PropTypes.string,
   href: PropTypes.string,
 };

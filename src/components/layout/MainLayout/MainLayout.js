@@ -1,16 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import clsx from "clsx";
-
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
 import styles from "./MainLayout.module.scss";
 import { Link } from "react-router-dom";
 
-const Component = ({ className, children }) => (
-  <div className={clsx(className, styles.root)}>
+const Component = ({ children }) => (
+  <div className={styles.root}>
     <Link to="/">
       <h2 className={styles.logo}>Notice Board!</h2>
     </Link>

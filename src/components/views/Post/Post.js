@@ -16,7 +16,6 @@ const Component = ({ className, children }) => {
   const { id } = useParams();
   const logged = true;
   const postData = useSelector((state) => getPostsById(state, id));
-  console.log(postData, id);
 
   if (logged) {
     return (
@@ -24,6 +23,33 @@ const Component = ({ className, children }) => {
         <div className={styles.post}>
           <h2>{postData.title}</h2>
           <p className={styles.content}>{postData.content}</p>
+          <div className={styles.moreInfo}>
+            {postData.img ? (
+              <div className={styles.imageContainer}>
+                <img src={postData.img} alt={postData.imgDescription}></img>
+              </div>
+            ) : (
+              ""
+            )}
+            {postData.price ? (
+              <div className={styles.price}>Price: {postData.price}$</div>
+            ) : (
+              ""
+            )}
+            {postData.tel ? (
+              <div className={styles.tel}>tel: {postData.tel}</div>
+            ) : (
+              ""
+            )}
+            {postData.localization ? (
+              <div className={styles.localization}>
+                Localization: {postData.localization}
+              </div>
+            ) : (
+              ""
+            )}
+          </div>
+
           <div className={styles.infoContainer}>
             <p>author: {postData.authorEmail}</p>
             <p>status: {postData.status}</p>
@@ -35,7 +61,9 @@ const Component = ({ className, children }) => {
           <Button href={`/post/${id}/edit`} id={id}>
             Edit
           </Button>
-          <Button id={id}>Delete</Button>
+          <Button href={`/`} id={id}>
+            Delete
+          </Button>
         </div>
 
         {children}

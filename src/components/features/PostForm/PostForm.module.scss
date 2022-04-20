@@ -3,6 +3,10 @@
 .root {
   max-width: 600px;
   margin: 250px auto;
+  background-color: rgb(86, 88, 107);
+  padding: 25px;
+  border: 5px dotted #2626395b;
+  border-radius: 25px;
 
   h2 {
     position: relative;
@@ -24,12 +28,59 @@
     display: flex;
     flex-direction: column;
 
-    label {
+    label,
+    p {
       font-size: 18px;
+      margin-left: 10px;
+
+      .required {
+        color: rgb(255, 98, 98);
+        font-size: 20px;
+      }
     }
 
-    input {
+    :is(input, select, textarea) {
+      position: relative;
       margin-bottom: 25px;
+      padding: 10px;
+      border-radius: 10px;
+      overflow: visible;
+      border: 1px solid gray;
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .date {
+      background-color: rgb(169, 169, 169);
+    }
+
+    .price {
+      width: 65px;
+    }
+
+    .control {
+      margin: 0 auto;
+    }
+
+    img {
+      margin-bottom: 25px;
+    }
+    button {
+      background-color: rgb(66, 85, 152);
+      text-align: center;
+      padding: 15px 25px;
+      border-radius: 25px;
+      color: white;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: 0.1s;
+      border: none;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgb(77, 99, 179);
+      }
     }
   }
 }

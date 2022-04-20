@@ -63,7 +63,6 @@ export const reducer = (statePart = [], action = {}) => {
     }
     case ADD_POST: {
       return [...statePart, { ...action.payload, id: shortid() }];
-      // return console.log([...statePart.data, { ...action.payload }]);
     }
     default:
       return statePart;

@@ -9,15 +9,15 @@ import clsx from "clsx";
 import styles from "./Header.module.scss";
 import { Button } from "../../common/button/Button/Button";
 
-const Component = ({ className, children }) => {
+const Component = ({ className }) => {
   const logged = true;
 
   if (!logged)
     return (
-      <div className={clsx(className, styles.root)}>
-        <h2>Header</h2>
+      <div className={styles.root}>
+        <h2>Login to board!</h2>
         <div className={styles.container}>
-          <Button href="www.google.com">Login to board!</Button>
+          <Button href="www.google.com">Log in</Button>
         </div>
       </div>
     );
@@ -27,8 +27,10 @@ const Component = ({ className, children }) => {
       <div className={clsx(className, styles.root)}>
         <h2>Welcome to Notice Board!</h2>
         <div className={styles.container}>
-          <Button href="/">open posts</Button>
-          <Button color={styles.logoutBtn} href="/">log out</Button>
+          <Button href="/">open your posts</Button>
+          <Button color={styles.logoutBtn} href="/">
+            log out
+          </Button>
         </div>
       </div>
     );

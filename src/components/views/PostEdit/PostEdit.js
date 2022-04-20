@@ -23,7 +23,6 @@ const Component = () => {
     dispatch(editPost({ ...post, id }));
     history.push("/");
   };
-  console.log(post);
   return (
     <div className={styles.root}>
       <PostForm
@@ -35,6 +34,11 @@ const Component = () => {
         href={`/post/${id}`}
         title={post.title}
         content={post.content}
+        price={post.price}
+        localization={post.localization}
+        tel={post.tel}
+        image={post.image}
+        imageDescription={post.imageDescription}
         publishDate={post.publishDate}
         latestUpdate={post.latestUpdate}
         authorEmail={post.authorEmail}

@@ -1,17 +1,16 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-
-import clsx from 'clsx';
+import React from "react";
+import PropTypes from "prop-types";
 
 // import { connect } from 'react-redux';
 // import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
 
-import styles from './NotFound.module.scss';
+import styles from "./NotFound.module.scss";
+import { Button } from "../../common/button/Button/Button";
 
-const Component = ({className, children}) => (
-  <div className={clsx(className, styles.root)}>
-    <h2>NotFound</h2>
-    {children}
+const Component = () => (
+  <div className={styles.root}>
+    <h2>You are in the wrong place!</h2>
+    <Button href="/">GO BACK</Button>
   </div>
 );
 
