@@ -14,7 +14,6 @@ import { useHistory } from "react-router-dom";
 
 const Component = () => {
   const { id } = useParams();
-  // const navigate = useNavigate();
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -26,12 +25,11 @@ const Component = () => {
   return (
     <div className={styles.root}>
       <PostForm
-        key={post.id}
-        id={post.id}
         action={handleSubmit}
         actionText="Edit"
         actionTitleText="Edit your post!"
         href={`/post/${id}`}
+        id={post.id}
         title={post.title}
         content={post.content}
         price={post.price}
@@ -52,16 +50,6 @@ Component.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
 };
-
-// const mapStateToProps = state => ({
-//   someProp: reduxSelector(state),
-// });
-
-// const mapDispatchToProps = dispatch => ({
-//   someAction: arg => dispatch(reduxActionCreator(arg)),
-// });
-
-// const Container = connect(mapStateToProps, mapDispatchToProps)(Component);
 
 export {
   Component as PostEdit,

@@ -1,9 +1,9 @@
 import shortid from "shortid";
 
 /* selectors */
-export const getAll = (state) => state.posts;
+export const getAll = (state) => state.posts.data;
 export const getPostsById = (state, postId) =>
-  state.posts.find((post) => post.id === postId);
+  state.posts.data.find((post) => post.id === postId);
 
 /* action name creator */
 const reducerName = "posts";
@@ -57,12 +57,18 @@ export const reducer = (statePart = [], action = {}) => {
       };
     }
     case EDIT_POST: {
-      return statePart.map((post) =>
-        post.id === action.payload.id ? { ...post, ...action.payload } : post
-      );
+      return {
+        ...statePart,
+        data: statePart.data.map((post) =>
+          post.id === action.payload.id ? { ...post, ...action.payload } : post
+        ),
+      };
     }
     case ADD_POST: {
-      return [...statePart, { ...action.payload, id: shortid() }];
+      return {
+        ...statePart,
+        data: [...statePart.data, { ...action.payload, id: shortid() }],
+      };
     }
     default:
       return statePart;
