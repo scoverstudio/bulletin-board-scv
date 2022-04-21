@@ -5,20 +5,7 @@ import styles from "./Post.module.scss";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { getPostsById } from "../../../redux/postsRedux";
-import { Button } from "../../common/button/Button/Button";
-
-const Control = (id) => {
-  return (
-    <div className={styles.control}>
-      <Button href={`/post/${id}/edit`} id={id}>
-        Edit
-      </Button>
-      <Button href={`/`} id={id}>
-        Delete
-      </Button>
-    </div>
-  );
-};
+import Control from "../../../Control/Control";
 
 const Component = ({ className, children }) => {
   const { id } = useParams();
@@ -56,7 +43,7 @@ const Component = ({ className, children }) => {
           <p className={styles.date}>last update: {postData.latestUpdate}</p>
         </div>
       </div>
-      {logged && Control(id)}
+      {logged && <Control classStyle={styles.control} id={id} />}
       {children}
     </div>
   );
