@@ -1,9 +1,13 @@
+import axios from "axios";
 import shortid from "shortid";
+import { API_URL } from "../config";
+import { initialState } from "./initialState";
 
 /* selectors */
 export const getAll = (state) => state.posts.data;
 export const getPostsById = (state, postId) =>
-  state.posts.data.find((post) => post.id === postId);
+  state.posts.data.find((post) => post._id === postId);
+export const getAllPublished = (state) => state.posts.data;
 
 /* action name creator */
 const reducerName = "posts";
@@ -24,6 +28,39 @@ export const editPost = (payload) => ({ payload, type: EDIT_POST });
 export const addPost = (payload) => ({ payload, type: ADD_POST });
 
 /* thunk creators */
+export const fetchPublished = () => {
+  return (dispatch, getState) => {
+    if (
+      initialState.posts.data.length === 0 &&
+      initialState.posts.loading.active === false
+    ) {
+      dispatch(fetchStarted());
+      axios
+        .get(`${API_URL}/posts`)
+        .then((res) => {
+          dispatch(fetchSuccess(res.data));
+        })
+        .catch((err) => {
+          dispatch(fetchError(err.message || true));
+        });
+    }
+  };
+};
+
+export const addPostRequest = (post) => {
+  return async (dispatch) => {
+    console.log(post);
+    dispatch(fetchStarted());
+    axios
+      .post(`${API_URL}/posts`, post)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
 
 /* reducer */
 export const reducer = (statePart = [], action = {}) => {

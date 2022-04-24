@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./PostAdd.module.scss";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { addPost } from "../../../redux/postsRedux";
+import { addPostRequest } from "../../../redux/postsRedux";
 import { PostForm } from "../../features/PostForm/PostForm";
 
 const Component = () => {
@@ -11,7 +11,8 @@ const Component = () => {
   const history = useHistory();
 
   const handleSubmit = (post) => {
-    dispatch(addPost(post));
+    // dispatch(addPost(post));
+    dispatch(addPostRequest(post));
     history.push("/");
   };
   return (

@@ -9,6 +9,7 @@ import Control from "../../../Control/Control";
 
 const Component = ({ className, children }) => {
   const { id } = useParams();
+
   const logged = true;
   const postData = useSelector((state) => getPostsById(state, id));
 
@@ -26,8 +27,8 @@ const Component = ({ className, children }) => {
           {postData.price && (
             <div className={styles.price}>Price: {postData.price}$</div>
           )}
-          {postData.tel && (
-            <div className={styles.tel}>tel: {postData.tel}</div>
+          {postData.phone && (
+            <div className={styles.phone}>phone: {postData.phone}</div>
           )}
           {postData.localization && (
             <div className={styles.localization}>

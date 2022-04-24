@@ -11,7 +11,7 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
     props.imageDescription || ""
   );
   const [price, setPrice] = useState(props.price || "");
-  const [tel, setTel] = useState(props.tel || "");
+  const [phone, setPhone] = useState(props.phone || "");
   const [localization, setLocalization] = useState(props.localization || "");
   const [publishDate, setPublishDate] = useState(props.publishDate || "---");
   const [latestUpdate, setlatestUpdate] = useState(props.publishDate || "---");
@@ -24,6 +24,7 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
     month = "0" + month;
   }
   const date = today.getFullYear() + "-" + month + "-" + today.getDate();
+  console.log(date);
 
   useEffect(() => {
     if (props.publishDate) {
@@ -44,7 +45,7 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
       image,
       imageDescription,
       price,
-      tel,
+      phone,
       localization,
       publishDate,
       latestUpdate,
@@ -59,12 +60,13 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
       <h2>{actionTitleText}</h2>
       <form onSubmit={(e) => handleSubmit(e)}>
         <label htmlFor="title">
-          Title<span className={styles.required}>*</span> (min 10)
+          Title<span className={styles.required}>*</span> (min 3)
         </label>
         <input
           name="title"
           type="text"
-          minLength="10"
+          minLength="3"
+          maxLength="10"
           required
           onChange={(e) => setTitle(e.target.value)}
           value={title}
@@ -77,6 +79,7 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
           name="content"
           type="text"
           minLength="20"
+          maxLength="100"
           required
           onChange={(e) => setContent(e.target.value)}
           value={content}
@@ -90,7 +93,7 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
             type="file"
             name="image"
             accept="image/png, image/gif, image/jpeg"
-            onChange={(e) => setImage(e.target.value)}
+            onChange={(e) => setImage(e.target.files[0].name)}
           />
         )}
 
@@ -124,10 +127,10 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
 
         <label htmlFor="phone">Phone number</label>
         <input
-          type="tel"
+          type="phone"
           className={styles.phoneNumber}
-          value={tel}
-          onChange={(e) => setTel(e.target.value)}
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
           name="phone"
           pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
         />
@@ -208,8 +211,8 @@ Component.propTypes = {
   href: PropTypes.string,
   image: PropTypes.string,
   imageDescription: PropTypes.string,
-  price: PropTypes.string,
-  tel: PropTypes.string,
+  price: PropTypes.number,
+  phone: PropTypes.string,
   localization: PropTypes.string,
 };
 

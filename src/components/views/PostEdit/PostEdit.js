@@ -34,7 +34,7 @@ const Component = () => {
         content={post.content}
         price={post.price}
         localization={post.localization}
-        tel={post.tel}
+        phone={post.phone}
         image={post.image}
         imageDescription={post.imageDescription}
         publishDate={post.publishDate}
