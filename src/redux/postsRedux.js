@@ -64,7 +64,7 @@ export const fetchSinglePost = (id, setData, setIsLoading) => {
 export const addPostRequest = (post) => {
   return async (dispatch) => {
     dispatch(fetchStarted());
-    axios
+    await axios
       .post(`${API_URL}/posts`, post)
       .then((res) => {
         console.log(res);

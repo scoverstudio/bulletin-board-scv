@@ -10,8 +10,8 @@ const Component = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const handleSubmit = (post) => {
-    dispatch(addPostRequest(post));
+  const handleSubmit = async (post) => {
+    await dispatch(addPostRequest(post));
     history.push("/");
   };
   return (
