@@ -47,14 +47,40 @@ export const fetchPublished = () => {
   };
 };
 
+export const fetchSinglePost = (id, setData, setIsLoading) => {
+  return (dispatch, getState) => {
+    axios
+      .get(`${API_URL}/posts/${id}`)
+      .then((res) => {
+        setData(res.data);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        dispatch(fetchError(err.message || true));
+      });
+  };
+};
+
 export const addPostRequest = (post) => {
   return async (dispatch) => {
-    console.log(post);
     dispatch(fetchStarted());
     axios
       .post(`${API_URL}/posts`, post)
       .then((res) => {
         console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+};
+
+export const updatePostRequest = (id, updatedPost) => {
+  return async (dispatch) => {
+    axios
+      .put(`${API_URL}/posts/${id}`, updatedPost)
+      .then((res) => {
+        dispatch(editPost({ updatedPost, id }));
       })
       .catch((err) => {
         console.log(err);
@@ -107,6 +133,7 @@ export const reducer = (statePart = [], action = {}) => {
         data: [...statePart.data, { ...action.payload, id: shortid() }],
       };
     }
+
     default:
       return statePart;
   }

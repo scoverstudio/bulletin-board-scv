@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import styles from "./PostForm.module.scss";
+import { useForm } from "react-hook-form";
 
 const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
   const [title, setTitle] = useState(props.title || "");
@@ -16,7 +17,12 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
   const [publishDate, setPublishDate] = useState(props.publishDate || "---");
   const [latestUpdate, setlatestUpdate] = useState(props.publishDate || "---");
   const [authorEmail, setauthorEmail] = useState(props.authorEmail || "");
-  const [status, setStatus] = useState(props.status);
+  const [status, setStatus] = useState(props.status || "draft");
+  const {
+    register,
+    handleSubmit: validate,
+    formState: { errors },
+  } = useForm();
 
   const today = new Date();
   let month = today.getMonth() + 1;
@@ -24,7 +30,6 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
     month = "0" + month;
   }
   const date = today.getFullYear() + "-" + month + "-" + today.getDate();
-  console.log(date);
 
   useEffect(() => {
     if (props.publishDate) {
@@ -37,8 +42,8 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
     setTitle("");
     setContent("");
   };
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
+    console.log(status);
     action({
       title,
       content,
@@ -55,36 +60,64 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
     clearState();
   };
 
+  console.log(errors, "errors");
+
   return (
     <div className={styles.root}>
       <h2>{actionTitleText}</h2>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <form onSubmit={validate(handleSubmit)}>
         <label htmlFor="title">
           Title<span className={styles.required}>*</span> (min 3)
         </label>
         <input
+          {...register("title", {
+            required: {
+              value: true,
+              message: "Title field is required",
+            },
+            minLength: {
+              value: 3,
+              message: "min. 3 characters",
+            },
+            maxLength: {
+              value: 10,
+              message: "max. 10 characters",
+            },
+          })}
           name="title"
           type="text"
-          minLength="3"
-          maxLength="10"
-          required
           onChange={(e) => setTitle(e.target.value)}
           value={title}
         />
-
+        {errors.title && (
+          <span className={styles.error}>{errors.title.message}</span>
+        )}
         <label htmlFor="content">
           Content<span className={styles.required}>*</span> (min 20)
         </label>
-        <textarea
+        <input
+          {...register("content", {
+            required: {
+              value: true,
+              message: "Title content is required",
+            },
+            minLength: {
+              value: 10,
+              message: "min. 10 characters",
+            },
+            maxLength: {
+              value: 100,
+              message: "max. 100 characters",
+            },
+          })}
           name="content"
           type="text"
-          minLength="20"
-          maxLength="100"
-          required
           onChange={(e) => setContent(e.target.value)}
           value={content}
         />
-
+        {errors.content && (
+          <span className={styles.error}>{errors.content.message}</span>
+        )}
         <label htmlFor="image">Image</label>
         {props.image ? (
           <img alt={props.imageDescription} src={props.image} />
@@ -125,16 +158,23 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
           name="price"
         />
 
-        <label htmlFor="phone">Phone number</label>
+        <label htmlFor="phone">Phone number (np. 997-997-997)</label>
         <input
+          {...register("phone", {
+            pattern: {
+              value: /[0-9]{3}-[0-9]{3}-[0-9]{3}/,
+              message: "Wrong phone number!",
+            },
+          })}
           type="phone"
           className={styles.phoneNumber}
           value={phone}
           onChange={(e) => setPhone(e.target.value)}
           name="phone"
-          pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
         />
-
+        {errors.phone && (
+          <span className={styles.error}>{errors.phone.message}</span>
+        )}
         <label htmlFor="localization">Localization</label>
         <input
           type="text"
@@ -162,23 +202,40 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
         />
 
         <label htmlFor="authorEmail">
-          Author<span className={styles.required}>*</span>
+          Author (email)<span className={styles.required}>*</span>
         </label>
         <input
+          {...register("authorEmail", {
+            required: {
+              value: true,
+              message: "Title email is required",
+            },
+            pattern: {
+              value:
+                /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/,
+              message: "wrong email!",
+            },
+          })}
           name="authorEmail"
           onChange={(e) => setauthorEmail(e.target.value)}
-          type="text"
-          required
+          type="email"
           value={authorEmail}
         />
-
+        {errors.authorEmail && (
+          <span className={styles.error}>{errors.authorEmail.message}</span>
+        )}
         <label htmlFor="status">
           Status<span className={styles.required}>*</span>
         </label>
         <select
+          {...register("status", {
+            required: {
+              value: true,
+              message: "Title status is required",
+            },
+          })}
           name="status"
           value={status}
-          required
           onChange={(e) => setStatus(e.target.value)}
           id="status"
         >
@@ -186,6 +243,9 @@ const Component = ({ action, actionText, actionTitleText, href, ...props }) => {
           <option value="published">Published</option>
           <option value="closed">Closed</option>
         </select>
+        {errors.status && (
+          <span className={styles.error}>{errors.status.message}</span>
+        )}
         <p>
           <span className={styles.required}>*</span> - required
         </p>

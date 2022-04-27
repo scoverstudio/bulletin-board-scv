@@ -1,14 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import { connect } from 'react-redux';
-// import { reduxSelector, reduxActionCreator } from '../../../redux/exampleRedux.js';
-
 import styles from "./PostEdit.module.scss";
 import { useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { editPost, getPostsById } from "../../../redux/postsRedux";
+import { getPostsById, updatePostRequest } from "../../../redux/postsRedux";
 import { PostForm } from "../../features/PostForm/PostForm";
 import { useHistory } from "react-router-dom";
 
@@ -18,10 +15,12 @@ const Component = () => {
   const history = useHistory();
 
   const post = useSelector((state) => getPostsById(state, id));
+
   const handleSubmit = (post) => {
-    dispatch(editPost({ ...post, id }));
+    dispatch(updatePostRequest(id, { ...post }));
     history.push("/");
   };
+
   return (
     <div className={styles.root}>
       <PostForm

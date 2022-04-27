@@ -11,7 +11,6 @@ const Component = () => {
   const history = useHistory();
 
   const handleSubmit = (post) => {
-    // dispatch(addPost(post));
     dispatch(addPostRequest(post));
     history.push("/");
   };

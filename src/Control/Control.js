@@ -5,7 +5,7 @@ import { Button } from "../components/common/button/Button/Button";
 const Control = ({ id, classStyle }) => {
   return (
     <div className={classStyle}>
-      <Button href={`/post/${id}/edit`} id={id}>
+      <Button href={`/`} id={id}>
         Edit
       </Button>
       <Button href={`/`} id={id}>

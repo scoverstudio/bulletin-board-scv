@@ -6,7 +6,7 @@ const postSchema = new mongoose.Schema({
   latestUpdate: { type: String },
   status: { type: String, required: true },
   title: { type: String, minlength: 3, maxlength: 10, required: true },
-  content: { type: String, minlength: 20, maxlength: 100, required: true },
+  content: { type: String, minlength: 10, maxlength: 100, required: true },
   image: { type: String },
   imageDescription: { type: String },
   price: { type: Number },

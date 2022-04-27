@@ -32,6 +32,7 @@
     p {
       font-size: 18px;
       margin-left: 10px;
+      margin-top: 25px;
 
       .required {
         color: rgb(255, 98, 98);
@@ -41,7 +42,6 @@
 
     :is(input, select, textarea) {
       position: relative;
-      margin-bottom: 25px;
       padding: 10px;
       border-radius: 10px;
       overflow: visible;
@@ -49,6 +49,10 @@
       &:focus {
         outline: none;
       }
+    }
+
+    .error {
+      color: red;
     }
 
     .date {
